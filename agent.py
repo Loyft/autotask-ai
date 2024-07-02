@@ -10,27 +10,49 @@ from tools import tools
 load_dotenv()
 client = OpenAI(api_key=os.getenv('API_KEY'))
 
+def calculate_cost(response, model):
+    prompt_tokens = response.usage.prompt_tokens
+    completion_tokens = response.usage.completion_tokens
+
+    if 'gpt-4o' in model:
+        # gpt-4o pricing
+        input_cost = prompt_tokens * 5.00 / 1000000
+        output_cost = completion_tokens * 15.00 / 1000000
+    else:
+        # GPT-3 pricing
+        input_cost = prompt_tokens * 0.50 / 1000000
+        output_cost = completion_tokens * 1.50 / 1000000
+
+    total_cost = input_cost + output_cost
+    return total_cost
+
+def cost_color(total_cost):
+    if total_cost < 0.01:
+        return LIGHT_GREEN + f"${total_cost:.6f}" + RESET
+    elif total_cost < 0.10:
+        return LIGHT_YELLOW + f"${total_cost:.6f}" + RESET
+    else:
+        return RED + f"⚠️ ${total_cost:.6f}" + RESET
+
 def run_conversation(message, messages, model="gpt-3.5-turbo"):
-    # Append the user input (message) to the messages history
     messages.append(message)
 
     content = message['content'].strip().lower()
-    
+
     # Handling commands
     if content.startswith('/'):
         if content == '/gpt3':
             model = "gpt-3.5-turbo"
-            print("Switched to GPT-3-turbo.")
+            print(LIGHT_GREEN + "Switched to GPT-3-turbo." + RESET)
         elif content == '/gpt4':
-            model = "gpt-4"
-            print("Switched to GPT-4.")
+            model = "gpt-4o"
+            print(LIGHT_GREEN + "Switched to gpt-4o." + RESET)
         elif content == '/gpt':
-            print(f"Current model is: {model}")
+            print(LIGHT_GREEN + f"Current model is: {model}" + RESET)
         else:
-            print("Invalid command.")
+            print(LIGHT_GREEN + "Invalid command." + RESET)
 
-        # Request new input after handling command
-        user_input = input(LIGHT_GREEN + "\nUSER: ")
+        user_input = input(LIGHT_GREEN + "\nUSER: " + RESET)
         message = {
             "role": "user",
             "content": user_input
@@ -42,7 +64,6 @@ def run_conversation(message, messages, model="gpt-3.5-turbo"):
         print(LIGHT_YELLOW + "GPT: Goodbye! 👋" + RESET)
         return
 
-    # Call to the AI model
     response = client.chat.completions.create(
         model=model,
         messages=messages,
@@ -51,8 +72,6 @@ def run_conversation(message, messages, model="gpt-3.5-turbo"):
     )
 
     response_message = response.choices[0].message
-
-    # If tool calls are requested, handle them
     tool_calls = response_message.tool_calls
     if tool_calls:
         handle_tool_calls(tool_calls, messages, model, response_message)
@@ -86,8 +105,10 @@ def handle_tool_calls(tool_calls, messages, model, response_message):
     process_user_input(second_response, messages, model)
 
 def process_user_input(response, messages, model):
-    token_info = f" ({response.usage.total_tokens} Tokens)"
-    user_input = input(DARK_YELLOW + "GPT:" + RESET + LIGHT_YELLOW + f" {response.choices[0].message.content}{token_info}\n" + DARK_GREEN + "USER: " + RESET + LIGHT_GREEN)
+    token_info = f" {response.usage.total_tokens} Tokens"
+    cost = calculate_cost(response, model)
+    cost_display = cost_color(cost)
+    user_input = input(DARK_YELLOW + "GPT:" + RESET + LIGHT_YELLOW + f" {response.choices[0].message.content} ({token_info} - {cost_display})\n" + DARK_GREEN + "USER: " + RESET + LIGHT_GREEN)
     if user_input.strip().lower() == 'exit':
         print(LIGHT_YELLOW + "GPT: Goodbye! 👋" + RESET)
         return

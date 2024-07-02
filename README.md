@@ -51,21 +51,25 @@ To run this chatbot on your local machine, follow these steps:
    python3 agent.py
    ```
 
-6. **Change GPT Model**
+## Usage
+
+1. **Change GPT Model**
 
    Use commands via `/` to change the current GPT model.
 
    `/gpt3` to use gpt-3.5-turbo
 
-   `/gpt4` to use gpt-4
+   `/gpt4` to use gpt-4o
 
    `/gpt`  to display the current GPT model.
 
-7. **Exit the Chatbot** 
+2. **Usage Cost**
+
+   Displays the Token usage and total cost of the response (prompt + completion)
+
+3. **Exit the Chatbot** 
 
    To exit the Chat type `exit` when asked for a prompt.
-
-
 
 ## Contributing
 Contributions are welcome! If you have suggestions or improvements, feel free to fork the repository and submit a pull request. 😊
