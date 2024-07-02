@@ -1,0 +1,9 @@
+# ANSI color codes
+DARK_GREEN = '\033[32m'
+LIGHT_GREEN = '\033[92m'
+DARK_YELLOW = '\033[33m' 
+LIGHT_YELLOW = '\033[93m'
+DARK_VIOLET = '\033[35m' 
+LIGHT_VIOLET = '\033[95m' 
+RESET = '\033[0m'
+BOLD = '\033[1m'
