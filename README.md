@@ -3,6 +3,12 @@
 ## Overview
 This repository contains an AI Chatbot Agent designed to interact with the user via the command-line interface. The chatbot utilizes OpenAI's GPT model to generate responses and carry out tasks such as reading from and writing to files and more. The chatbot dynamically integrates with the OpenAI API to fetch and compute responses based on user inputs and predefined functions.
 
+## Showcase
+Creating a ToDo-List Website (gpt-3.5-turbo)
+
+https://github.com/Loyft/autotask-ai/assets/67104490/98b9764b-5e62-4e15-a317-e0a3393a6bfb
+
+
 ## Features
 - **Dynamic Conversation Handling:** Leverages OpenAI's GPT-3.5-turbo to handle conversations, making appropriate API and function calls as required.
 - **File Operations:** Includes functions to read from and write to files, enabling data retrieval and storage during interactions. Can also create directories, list files in a given directory and delete files (use with caution).
