@@ -1,11 +1,11 @@
 # AI Chatbot Agent
 
 ## Overview
-This repository contains an AI Chatbot Agent designed to interact with the user via the command-line interface. The chatbot utilizes OpenAI's GPT model to generate responses and carry out tasks such as reading from and writing to files. The chatbot dynamically integrates with the OpenAI API to fetch and compute responses based on user inputs and predefined functions.
+This repository contains an AI Chatbot Agent designed to interact with the user via the command-line interface. The chatbot utilizes OpenAI's GPT model to generate responses and carry out tasks such as reading from and writing to files and more. The chatbot dynamically integrates with the OpenAI API to fetch and compute responses based on user inputs and predefined functions.
 
 ## Features
 - **Dynamic Conversation Handling:** Leverages OpenAI's GPT-3.5-turbo to handle conversations, making appropriate API and function calls as required.
-- **File Operations:** Includes functions to read from and write to files, enabling data retrieval and storage during interactions.
+- **File Operations:** Includes functions to read from and write to files, enabling data retrieval and storage during interactions. Can also create directories, list files in a given directory and delete files (use with caution).
 - **ANSI Color Coding:** Enhances the CLI experience by using ANSI color codes to differentiate between user inputs, GPT responses, and function calls.
 
 ## Setup

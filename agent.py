@@ -4,11 +4,11 @@ import json
 from dotenv import load_dotenv
 from openai import OpenAI
 from config import *
-from utils import read_from_file, write_to_file
+from utils import read_from_file, write_to_file, list_files, create_directory, delete_file
 from tools import tools
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv('API_KEY'))
+client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 def calculate_cost(response, model):
     prompt_tokens = response.usage.prompt_tokens
@@ -82,6 +82,9 @@ def handle_tool_calls(tool_calls, messages, model, response_message):
     available_functions = {
         "read_from_file": read_from_file,
         "write_to_file": write_to_file,
+        "list_files": list_files,
+        "create_directory": create_directory,
+        "delete_file": delete_file,
     }
     messages.append(response_message)
 
@@ -105,7 +108,7 @@ def handle_tool_calls(tool_calls, messages, model, response_message):
     process_user_input(second_response, messages, model)
 
 def process_user_input(response, messages, model):
-    token_info = f" {response.usage.total_tokens} Tokens"
+    token_info = f"{response.usage.total_tokens} Tokens"
     cost = calculate_cost(response, model)
     cost_display = cost_color(cost)
     user_input = input(DARK_YELLOW + "GPT:" + RESET + LIGHT_YELLOW + f" {response.choices[0].message.content} ({token_info} - {cost_display})\n" + DARK_GREEN + "USER: " + RESET + LIGHT_GREEN)
