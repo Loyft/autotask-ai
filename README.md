@@ -14,6 +14,11 @@ https://github.com/Loyft/autotask-ai/assets/67104490/98b9764b-5e62-4e15-a317-e0a
 - **File Operations:** Includes functions to read from and write to files, enabling data retrieval and storage during interactions. Can also create directories, list files in a given directory and delete files (use with caution).
 - **ANSI Color Coding:** Enhances the CLI experience by using ANSI color codes to differentiate between user inputs, GPT responses, and function calls.
 
+## Flowchart
+
+<img width="767" alt="Screenshot 2024-07-03 at 14 04 39" src="https://github.com/Loyft/autotask-ai/assets/67104490/bdec5083-5dcb-4efb-be55-7c23e6692f3a">
+
+
 ## Setup
 To run this chatbot on your local machine, follow these steps:
 
