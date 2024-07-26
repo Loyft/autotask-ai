@@ -14,7 +14,11 @@ def calculate_cost(response, model):
     prompt_tokens = response.usage.prompt_tokens
     completion_tokens = response.usage.completion_tokens
 
-    if 'gpt-4o' in model:
+    if 'gpt-4o-mini' in model:
+        # gpt-40-min pricing
+        input_cost = prompt_tokens * 0.15 / 1000000
+        output_cost = completion_tokens * 0.6 / 1000000
+    elif 'gpt-4o' in model:
         # gpt-4o pricing
         input_cost = prompt_tokens * 5.00 / 1000000
         output_cost = completion_tokens * 15.00 / 1000000
@@ -34,7 +38,7 @@ def cost_color(total_cost):
     else:
         return RED + f"⚠️ ${total_cost:.6f}" + RESET
 
-def run_conversation(message, messages, model="gpt-3.5-turbo"):
+def run_conversation(message, messages, model="gpt-4o-mini"):
     messages.append(message)
 
     content = message['content'].strip().lower()
@@ -44,6 +48,9 @@ def run_conversation(message, messages, model="gpt-3.5-turbo"):
         if content == '/gpt3':
             model = "gpt-3.5-turbo"
             print(LIGHT_GREEN + "Switched to GPT-3-turbo." + RESET)
+        elif content == '/gpt4-mini':
+            model = "gpt-4o-mini"
+            print(LIGHT_GREEN + "Switched to gpt-4o-mini." + RESET)
         elif content == '/gpt4':
             model = "gpt-4o"
             print(LIGHT_GREEN + "Switched to gpt-4o." + RESET)

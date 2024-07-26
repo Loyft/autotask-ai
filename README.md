@@ -4,13 +4,13 @@
 This repository contains an AI Chatbot Agent designed to interact with the user via the command-line interface. The chatbot utilizes OpenAI's GPT model to generate responses and carry out tasks such as reading from and writing to files and more. The chatbot dynamically integrates with the OpenAI API to fetch and compute responses based on user inputs and predefined functions.
 
 ## Showcase
-Creating a ToDo-List Website (gpt-3.5-turbo)
+Creating a ToDo-List Website (gpt-4o-mini)
 
 https://github.com/Loyft/autotask-ai/assets/67104490/98b9764b-5e62-4e15-a317-e0a3393a6bfb
 
 
 ## Features
-- **Dynamic Conversation Handling:** Leverages OpenAI's GPT-3.5-turbo to handle conversations, making appropriate API and function calls as required.
+- **Dynamic Conversation Handling:** Leverages OpenAI's GPT Models to handle conversations, making appropriate API and function calls as required.
 - **File Operations:** Includes functions to read from and write to files, enabling data retrieval and storage during interactions. Can also create directories, list files in a given directory and delete files (use with caution).
 - **ANSI Color Coding:** Enhances the CLI experience by using ANSI color codes to differentiate between user inputs, GPT responses, and function calls.
 
@@ -31,33 +31,30 @@ To run this chatbot on your local machine, follow these steps:
    cd autotask-ai
    ```
 
-2. **Environment Setup** 
 
-   Ensure you have Python installed on your machine, and then set up a virtual environment:
-   ```
-   python3 -m venv venv
-   ```
-   Activate the virtual environment:
-   ```
-   source venv/bin/activate
-   ``` 
-   (On Windows use `venv\Scripts\activate`)
-
-3. **Install Dependencies** 
+2. **Install Dependencies** 
 
    Install necessary Python packages:
    ```
    pip install -r requirements.txt
    ```
+   or
+   ```
+   pip3 install -r requirements.txt
+   ```
 
-4. **Set Up Environment Variables** 
+3. **Set Up Environment Variables** 
 
    Create a `.env` file in the root directory and add your OpenAI API key:
    ```
    API_KEY=your_openai_api_key_here
    ```
 
-5. **Run the Chatbot**
+4. **Run the Chatbot**
+   ```
+   python agent.py
+   ```
+   or
    ```
    python3 agent.py
    ```
@@ -68,11 +65,13 @@ To run this chatbot on your local machine, follow these steps:
 
    Use commands via `/` to change the current GPT model.
 
+   `/gpt`  to display the currently active GPT model.
+
    `/gpt3` to use gpt-3.5-turbo
 
    `/gpt4` to use gpt-4o
 
-   `/gpt`  to display the current GPT model.
+   `/gpt4-mini` to use gpt-4o-mini (default)
 
 2. **Usage Cost**
 
